@@ -1,7 +1,8 @@
 # views.py
+
 from rest_framework import viewsets, generics
 
-from .serializers import WishlistsSerializer
+from .serializers import WishlistsSerializer, AvgBookRatingSerializer
 from .serializers import BooksSerializer
 from .serializers import GenresSerializer
 from .serializers import PurchasedbooksSerializer
@@ -111,10 +112,10 @@ class TopRatedBooksViewSet(generics.ListAPIView):
 
 
 class AverageRatingViewSet(generics.ListAPIView):
-    serializer_class = BookratingsSerializer
+    serializer_class = AvgBookRatingSerializer
 
     def get_queryset(self):
-        return Bookratings.objects.annotate(avg_rating=Avg('rating')).order_by('-avg_rating')
+        return Books.objects.all()
 
 
 class GenreListsViewSet(generics.ListAPIView):
